@@ -41,7 +41,7 @@ services:
       - ./spark/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
       - ./spark/jars_dir:/opt/bitnami/spark/ivy:z
     ports:
-      - '8081:8081'   
+      - '8081:8081'
     networks:
       - net
     depends_on:
@@ -97,19 +97,19 @@ services:
       - spark-worker2
 
   db:
-    container_name: pg_container
-    image: postgres
+    container_name: sql_server
+    build: /home/guilherme/docker-livy/SQLServer
     restart: always
     environment:
-        POSTGRES_USER: "postgres"
-        POSTGRES_PASSWORD: "12345"
-        POSTGRES_DB: "db"
-        POSTGRES_HOST_AUTH_METHOD: trust
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Mudar@123
+      MSSQL_DB: analytics
+      MSSQL_USER: Admin
+      MSSQL_PASSWORD: Mudar@123
     ports:
-      - "5432:5432"
-    networks:
-      - net
-        
+      - "1433:1433"
+   
+
 volumes:
   pg_data:
 
